@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  fit_journey_ms_auth:
+    build: ./msAuth
+    ports:
+      - "3000:3000"
+    depends_on:
+      - fit_journey_db
+    restart: always
+
+
+  fit_journey_ms_user:
+    build: ./msUser
+    ports:
+      - "3001:3001"
+    depends_on:
+      - fit_journey_db
+    restart: always
+    
+
+  fit_journey_ms_categories:
+    build: ./msCategories
+    ports:
+      - "3002:3002"
+    depends_on:
+      - fit_journey_db
+    restart: always
+    
+
+  fit_journey_ms_exercise:
+    build: ./msExercise
+    ports:
+      - "3003:3003"
+    depends_on:
+      - fit_journey_db
+    restart: always
+    
+
+  fit_journey_ms_routine:
+    build: ./msRoutine
+    ports:
+      - "3004:3004"
+    depends_on:
+      - fit_journey_db
+    restart: always
+    
+
+  fit_journey_ms_routine_traking_exercises:
+    build: ./msRoutineTrakingExercises
+    ports:
+      - "3005:3005"
+    depends_on:
+      - fit_journey_db
+    restart: always
+
+  fit_journey_ms_routine_traking:
+    build: ./msRoutineTraking
+    ports:
+      - "3006:3006"
+    depends_on:
+      - fit_journey_db
+    restart: always
+
+
+  fit_journey_db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    logging:
+      driver: none
+    restart: always
+
+volumes:
+  mongo_data:
